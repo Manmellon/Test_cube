@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MovingObject : MonoBehaviour
 {
     private List<Vector3> _wayPoints;
     private int _currentPointIndex;
 
-    [SerializeField] private float _movingSpeed;
+    private float _movingSpeed;
+
+    [SerializeField] private Slider _speedSlider;
+    [SerializeField] private Text _speedText;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +20,8 @@ public class MovingObject : MonoBehaviour
 
         _wayPoints = new List<Vector3>();
         AddWayPoint(transform.position);
+
+        SetMovingSpeed(_speedSlider.value);
     }
 
     // Update is called once per frame
@@ -45,5 +51,7 @@ public class MovingObject : MonoBehaviour
     public void SetMovingSpeed(float newSpeed)
     {
         _movingSpeed = newSpeed;
+
+        _speedText.text = _movingSpeed.ToString();
     }
 }
